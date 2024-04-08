@@ -59,8 +59,14 @@ io.on('connection', (socket) => {
     socket.emit('responseData', jsonData);
   });
 
+  socket.on('updateData', ({identifier,data}) => {
+    logger.log(`${identifier} 开始 updateData 数据 ${data}`);
+    // 读取JSON文件中的数据
+    jsonStorage.saveData(data);
+  });
+
   // 处理保存数据请求
-  socket.on('saveData', ({ identifier, data }) => {
+  socket.on('h5SaveData', ({ identifier, data }) => {
     logger.log(`收到 ${identifier} :`, data);
     
     // 在此处理保存数据的逻辑，例如保存数据到数据库等
@@ -70,11 +76,12 @@ io.on('connection', (socket) => {
   });
 });
 
+
 // 函数用于向指定标识符的客户端发送数据
 function sendDataToClient(identifier, data) {
     const socket = socketMap.get(identifier);
     if (socket) {
-      socket.emit('serverData', data);
+      socket.emit('serverUpdateData', data);
       logger.log(`Sent data to client with identifier ${identifier}`);
     } else {
       logger.log(`${identifier} , 没在线`);
