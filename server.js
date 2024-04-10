@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
     logger.log(`收到 ${identifier} : ${JSON.stringify(data)}`);
     
     jsonStorage.saveData(data);
-    socket.to(ROOM_NAME).emit('serverUpdateData', jsonData);
+    socket.to(ROOM_NAME).emit('serverUpdateData', data);
   });
 
   
