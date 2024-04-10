@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H5 Page 1</title>
+</head>
+<body>
+  <button id="queryButton">Query Data</button>
+  <div id="dataDisplay"></div> <!-- 添加一个用于显示数据的<div>元素 -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  <script>
+    const socket = io('http://192.168.11.12:3000');
+
+    const identifier = 'AndroidId'; // 定义标识符
+
+    // 发送查询数据请求，并传递标识符给服务器
+    document.getElementById('queryButton').addEventListener('click', () => {
+      socket.emit('queryData', identifier); // 发送带有标识符的请求
+    });
+
+    socket.on('serverUpdateData', (data) => {
+      console.log('Received data from server:', data);
+      // 在此处理从服务器接收到的数据
+      updateDataDisplay(data); // 调用函数更新页面显示
+    });
+    socket.emit("setIdentifier",identifier)
+
+    // 函数用于更新页面显示
+    function updateDataDisplay(data) {
+      const dataDisplay = document.getElementById('dataDisplay');
+      // 在这里根据你的数据结构更新页面元素的内容
+      // 这里只是一个示例，你需要根据实际数据结构进行修改
+      dataDisplay.textContent = JSON.stringify(data); // 将收到的数据转换为 JSON 字符串并显示在页面上
+    }
+  </script>
+</body>
+</html>

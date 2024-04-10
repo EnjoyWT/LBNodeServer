@@ -1,4 +1,4 @@
 {
-    "woshikey":12,
-    "woshikey2":12
+  "key1": "我是key1 对应的value值",
+  "key2": "我是key1 对应的value值"
 }
