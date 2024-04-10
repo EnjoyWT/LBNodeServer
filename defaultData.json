@@ -4,21 +4,15 @@
     "category": "一等奖",
     "probability": "5",
     "number": "1",
-    "timeRange": [
-      "00:00",
-      "23:00"
-    ],
-    "timeCount": "5"
+    "timeRange": ["00:00", "23:00"],
+    "timeCount": 3
   },
   {
     "id": 2,
     "category": "二等奖",
     "probability": "10",
     "number": "2",
-    "timeRange": [
-      "00:00",
-      "23:00"
-    ],
+    "timeRange": ["00:00", "23:00"],
     "timeCount": 3
   },
   {
@@ -26,10 +20,7 @@
     "category": "三等奖",
     "probability": "20",
     "number": "3",
-    "timeRange": [
-      "00:00",
-      "23:00"
-    ],
+    "timeRange": ["00:00", "23:00"],
     "timeCount": 3
   },
   {
@@ -37,10 +28,7 @@
     "category": "谢谢参与",
     "probability": "30",
     "number": "4",
-    "timeRange": [
-      "00:00",
-      "23:00"
-    ],
+    "timeRange": ["00:00", "23:00"],
     "timeCount": 3
   }
 ]
