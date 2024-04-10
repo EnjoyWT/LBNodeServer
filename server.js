@@ -49,7 +49,7 @@ io.on('connection', (socket) => {
       socketMap.set(identifier, socket);
 
       const jsonData = jsonStorage.readData();
-      logger.log(` ${identifier}登录时 ,返回给登录者的数据是: \n ${JSON.stringify(jsonData)}`);
+      logger.log(` ${identifier}登录时 ,返回给登录者的数据是:  ${JSON.stringify(jsonData)}`);
       socket.emit('serverUpdateData', jsonData);
 
     });
@@ -78,6 +78,7 @@ io.on('connection', (socket) => {
     logger.log(`${identifier} 开始 updateData 数据 ${data}`);
     // 读取JSON文件中的数据
     jsonStorage.saveData(data);
+    sendDataToClient("H5Admin",data)
   });
 
   // 处理保存数据请求
@@ -104,6 +105,7 @@ function sendDataToClient(identifier, data) {
       logger.log(`${identifier} , 没在线`);
     }
   }
+ 
   
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
