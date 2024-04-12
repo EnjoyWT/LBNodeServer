@@ -23,6 +23,7 @@ class Logger {
     });
   }
 
+  
   log(message) {
     this.logger.log({
       level: "info",
