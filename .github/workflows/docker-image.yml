@@ -26,7 +26,7 @@ jobs:
         with:
           images: yolojoy/lbnodeservice
           tags: |
-            type=schedule,pattern={{date 'YYYYMMDD-HHmmss' tz='Asia/Shanghai'}}
+            type=schedule,pattern={{date 'YYYYMMDD-hhmmss' tz='Asia/Tokyo'}}
 
     
       - name: Build and push Docker image
