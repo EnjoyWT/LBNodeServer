@@ -15,7 +15,6 @@ class JsonFileStorage {
       return null;
     }
   }
-
   // 保存数据到JSON文件
   saveData(data) {
     try {
