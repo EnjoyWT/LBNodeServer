@@ -25,7 +25,8 @@ jobs:
         uses: docker/metadata-action@v5  # 抽取项目信息，主要是镜像的tag
         with:
           images: yolojoy/lbnodeservice
-          tags: type=schedule,pattern={{date 'YYYYMMDD-HHmmss' tz='Asia/Shanghai'}}
+          tags: |
+            type=schedule,pattern={{date 'YYYYMMDD-HHmmss' tz='Asia/Shanghai'}}
 
     
       - name: Build and push Docker image
