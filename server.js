@@ -80,10 +80,11 @@ io.on('connection', (socket) => {
     socket.emit('serverUpdateData', jsonData);
   });
 
-  socket.on('updateData', ({identifier,data}) => {
-    logger.log(`${identifier} 开始 updateData 数据 ${data}`);
+  socket.on('updateData', (jsondataString) => {
+    let jsobj =  JSON.parse(jsondataString)
+    logger.log(` 开始 updateData 数据 ${jsobj}`);
     // 读取JSON文件中的数据
-    jsonStorage.saveData(data);
+    jsonStorage.saveData(jsobj);
   });
 
   // 处理保存数据请求

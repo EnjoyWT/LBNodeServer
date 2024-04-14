@@ -1,46 +1,46 @@
 [
   {
-    "id": 1,
-    "category": "一等奖",
-    "probability": "5",
     "number": "1",
-    "timeRange": [
-      "22:17",
-      "23:00"
-    ],
-    "timeCount": "10"
-  },
-  {
-    "id": 2,
-    "category": "二等奖",
+    "id": 1,
     "probability": "10",
+    "timeCount": 10,
+    "category": "一33",
+    "timeRange": [
+      "14:17",
+      "23:00"
+    ]
+  },
+  {
     "number": "2",
+    "id": 2,
+    "probability": "10",
+    "timeCount": 3,
+    "category": "二等奖",
     "timeRange": [
       "00:00",
       "23:00"
-    ],
-    "timeCount": 3
+    ]
   },
   {
-    "id": 3,
-    "category": "三等奖",
-    "probability": "20",
     "number": "3",
+    "id": 3,
+    "probability": "20",
+    "timeCount": 3,
+    "category": "三等333奖",
     "timeRange": [
       "00:00",
       "23:00"
-    ],
-    "timeCount": 3
+    ]
   },
   {
-    "id": 4,
-    "category": "谢谢参与",
-    "probability": "30",
     "number": "4",
+    "id": 4,
+    "probability": "30",
+    "timeCount": 3,
+    "category": "谢谢参与",
     "timeRange": [
       "00:00",
       "23:00"
-    ],
-    "timeCount": 3
+    ]
   }
 ]
