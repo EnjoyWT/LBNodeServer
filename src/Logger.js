@@ -1,4 +1,3 @@
-
 const winston = require('winston');
 const DailyRotateFile = require('winston-daily-rotate-file');
 
@@ -6,10 +5,13 @@ class Logger {
   constructor(logDirectory) {
     this.logDirectory = logDirectory;
     this.logger = winston.createLogger({
-        format: winston.format.combine(
-            winston.format.timestamp(), // 包含时间戳
-            winston.format.json() // 以JSON格式记录日志
-          ),
+      format: winston.format.combine(
+        winston.format.timestamp({
+          format: 'YYYY-MM-DD HH:mm:ss.SSS',
+          timezone: 'Asia/Shanghai'
+        }),
+        winston.format.json()
+      ),
       transports: [
         new DailyRotateFile({
           dirname: this.logDirectory,
@@ -23,12 +25,8 @@ class Logger {
     });
   }
 
-  
   log(message) {
-    this.logger.log({
-      level: "info",
-      message: message
-    });
+    this.logger.log({ level: 'info', message: message });
   }
 }
 
