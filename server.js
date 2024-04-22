@@ -96,7 +96,7 @@ io.on('connection', (socket) => {
     // 读取JSON文件中的数据
     jsonStorage.saveData(jsobj);
     socket.to(ROOM_NAME).emit('statusTodayUpdate', dailyCounter);
-
+    resetDailyCounter(false)
   });
 
   // 处理保存数据请求
@@ -132,12 +132,41 @@ io.on('connection', (socket) => {
       socket.emit('statusHistoryUpdate', filteredData);
   });
   });  
+
+ socket.on('queryTodayStatusData', ({start,end}) => {
+  
+    const startDate = moment.tz(start, 'Asia/Shanghai');
+    const endDate = moment.tz(end, 'Asia/Shanghai').endOf('day');
+   
+    fs.readFile('stats.txt', 'utf8', (err, data) => {
+      if (err) {
+          console.error('Error reading stats file:', err);
+          return;
+      }
+        const filteredData = data
+        .split('\n')
+        .filter(line => {
+            if (!line.trim()) return false; // Skip empty lines
+            
+            const timestamp = moment.tz(line.split(' % ')[0], 'Asia/Shanghai');
+            return timestamp.valueOf() >= startDate.valueOf() && timestamp.valueOf() <= endDate.valueOf();
+        }).map(line => {
+              const [date, count] = line.split(' % ');
+              return { date, count: parseInt(count) };
+          });
+
+      if (filteredData.length > 0) {
+          socket.emit('statusTodayUpdate', filteredData[0].count);
+      }    
+  });
+  });  
 });
 
  
 
 // Reset the daily counter and save the stats to a file at the end of the day
-function resetDailyCounter() {
+function resetDailyCounter(a = true) {
+    
   // Read the existing data from the file
   fs.readFile('./stats.txt', 'utf8', (err, data) => {
       if (err) {
@@ -163,20 +192,25 @@ function resetDailyCounter() {
               }else{
                 logger.log(`更新数据当天:${lastResetTime.format('YYYY-MM-DD')},抽奖总次数为:${dailyCounter}`);
               }
-            dailyCounter = 0;
-            lastResetTime = moment.tz('Asia/Shanghai').startOf('day');
+              if (a){
+                    dailyCounter = 0;
+                    lastResetTime = moment.tz('Asia/Shanghai').startOf('day');
+              }
+
 
           });
       } else {
           // If date is different, append the new data to the file
-          fs.appendFile('stats.txt', `${lastResetTime.format('YYYY-MM-DD')} - ${dailyCounter} calls\n`, (err) => {
+          fs.appendFile('stats.txt', `${lastResetTime.format('YYYY-MM-DD')} % ${dailyCounter} \n`, (err) => {
               if (err) {
                   console.error('Error saving stats:', err);
               } else {
                   logger.log(`新增数据当天:${lastResetTime.format('YYYY-MM-DD')},抽奖总次数为:${dailyCounter}`);
               }
-              dailyCounter = 0;
-              lastResetTime = moment.tz('Asia/Shanghai').startOf('day');
+              if (a){
+                dailyCounter = 0;
+                lastResetTime = moment.tz('Asia/Shanghai').startOf('day');
+              }
 
           });
       }

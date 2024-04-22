@@ -4,7 +4,7 @@
     "id": 1,
     "probability": "10",
     "timeCount": 10,
-    "category": "一33",
+    "category": "一等奖",
     "timeRange": [
       "14:17",
       "23:00"
@@ -26,7 +26,7 @@
     "id": 3,
     "probability": "20",
     "timeCount": 3,
-    "category": "三等333奖",
+    "category": "三等奖",
     "timeRange": [
       "00:00",
       "23:00"
