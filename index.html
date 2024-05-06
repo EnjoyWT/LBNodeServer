@@ -11,8 +11,12 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
   <script>
-    const socket = io('http://47.100.180.187:3000');
-    // const socket = io("http://localhost:3000");
+    // const socket = io('http://47.100.180.187:3000');
+    const socket = io("http://localhost:3000",{
+    auth: {
+      token: "abc"
+    }
+  });
 
     const identifier = 'AndroidId-1'; 
 

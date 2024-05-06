@@ -43,6 +43,18 @@ const io = socketIo(server,{
 // 用于存储连接的标识符和对应的 socket 实例的映射关系
 const socketMap = new Map();
 const  ROOM_NAME = "roomA"
+
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  console.log(token)
+  if (token == "abc"){ // 验证token 是否正确,是否过期
+    next()
+  }else{
+    const err = new Error("not authorized");
+    err.data = { content: "Please retry later" }; // additional details
+    next(err);
+  }
+});
 io.on('connection', (socket) => {
   logger.log('a user connected');
 
